@@ -1,4 +1,14 @@
+let hdWalletProvider
+
+const setupWallet = (
+    address, url, key
+) => {
+	var HDWalletProvider = require("@truffle/hdwallet-provider");
+	return new HDWalletProvider(key, url);
+}
+
 const os = require('os');
+
 
 let apiKey;
 try {
@@ -51,7 +61,14 @@ module.exports = {
     mainnet: createNetwork("mainnet"),
     rinkeby: createNetwork("rinkeby"),
     rinkeby2: createNetwork("rinkeby2"),
-    polygon_mumbai: createNetwork("polygon_mumbai")
+    polygon_mumbai: createNetwork("polygon_mumbai"),
+	aurora: {
+      provider: () => setupWallet('0x109E7E98DE7a6572948009f8733bbbd56f146fB1', 'https://testnet.aurora.dev/AiHEfCXeLBqodUosBPeddiTpJNfUHbRdx2aZEKMnsit1', '9d34444b91bf3bac70d7d89edad0c38295fd452078420255ff1f3631089d6af5'),
+      network_id: 0x4e454153,
+      gas: 10000000,
+	  gasPrice: "0",
+      from: '0x109E7E98DE7a6572948009f8733bbbd56f146fB1'
+    }
   },
 
   compilers: {
